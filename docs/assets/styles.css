@@ -6,10 +6,14 @@
 @media(max-width:600px){body{font-size:1rem}.wrap{width:calc(100% - 40px)}.hero{grid-template-columns:1fr;padding-top:2.5rem;gap:2rem}.hero h1{font-size:3.5rem}.hero .eyebrow{font-size:.75rem}.hero .actions{gap:.75rem}.hero-note{display:none}.hero figure img{aspect-ratio:4/3}.hero .lead{max-width:25rem}.examples,.service-grid,.product-grid,.sector-grid,.workshop-grid,.detail-grid,.service-detail,.contact-layout,.footer-grid{grid-template-columns:1fr}.examples{gap:2rem}.section-heading{margin-bottom:2rem}.service{padding-block:2rem;grid-template-columns:2rem 1fr;gap:.75rem}.product-grid{gap:3rem}.sector-grid{gap:1rem}.workshop-grid{gap:2rem}.contact-band .button{width:100%}.footer-bottom{flex-direction:column;gap:.75rem}.footer-grid{gap:1.5rem}.page-intro{padding-top:3rem}.service-detail{gap:1rem}.service-detail h2{margin-top:.75rem}.process{grid-template-columns:1fr;gap:1.5rem}.contact-layout{gap:3rem}.contact-layout aside{padding-left:0;padding-top:2rem;border-left:0;border-top:1px solid var(--line)}.detail-grid{gap:2rem}.anchor-nav{flex-direction:column}.contact-options{flex-direction:column}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
 
-/* Fotografías reales: conservar la pieza completa y dar espacio a las galerías. */
-.examples {row-gap:64px}
-.examples figure img {object-fit:contain;background:#e9e9e5}
+/* Encuadres uniformes en tarjetas y galerías, sin deformar las fotografías. */
+.examples {grid-template-columns:repeat(2,minmax(0,1fr));row-gap:64px}
 .project-gallery {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px;margin-bottom:100px;align-items:start}
-.project-gallery img {width:100%;height:auto;display:block}
-.project-gallery figure:only-child {grid-column:1/-1;max-width:850px;margin:auto}
-@media(max-width:700px){.project-gallery{grid-template-columns:1fr;gap:24px;margin-bottom:64px}.examples{row-gap:40px}}
+.hero figure img,.examples figure img,.product img,.workshop-grid figure img,.detail-grid figure img,.project-gallery img {width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:center;background:#e9e9e5}
+.examples img[src*="bayahibe.webp"] {object-position:center 64%}
+img[src*="bandera-preparacion"] {object-position:58% 62%}
+img[src*="letras-proceso"] {object-position:center 57%}
+img[src*="letras-pintura"] {object-position:center 45%}
+.project-gallery figure:only-child {width:100%}
+.process-gallery {margin-top:36px;margin-bottom:0}
+@media(max-width:600px){.examples,.project-gallery{grid-template-columns:1fr}.project-gallery{gap:24px;margin-bottom:64px}.process-gallery{margin-bottom:0}.examples{row-gap:40px}}
