@@ -87,3 +87,9 @@ h1,h2,h3{line-height:1.05;margin-bottom:.85rem}
  .hero figure img{aspect-ratio:4/3}
  .hero + .section{padding-top:2rem}
 }
+
+/* Fotos de acompañamiento para las cuatro capacidades. */
+.service{grid-template-columns:104px minmax(0,1fr);gap:1.25rem;align-items:start}
+.service-visual img{width:104px;height:104px;aspect-ratio:1;object-fit:cover;border-radius:4px}
+.service-visual .number{display:block;font-size:1rem;margin-top:.4rem}
+@media(max-width:600px){.service{grid-template-columns:76px minmax(0,1fr);gap:1rem}.service-visual img{width:76px;height:76px}.service h3{font-size:1.4rem}}
