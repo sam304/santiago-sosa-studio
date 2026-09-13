@@ -105,3 +105,17 @@ h1,h2,h3{line-height:1.05;margin-bottom:.85rem}
  .service p{max-width:none;margin-bottom:.65rem;line-height:1.45}
  .service .text-link{min-height:44px}
 }
+
+/* Encuadres fotográficos: dar prioridad a la pieza y reducir fondos secundarios. */
+img[src*="oceanpark.webp"]{object-position:center 34%}
+img[src*="bayahibe.webp"]{object-position:center 52%}
+img[src*="bayahibe-detalle.webp"]{object-position:center 48%}
+img[src*="punta-cana.webp"]{object-position:center 46%}
+img[src*="quiosco.webp"]{object-position:center 48%}
+img[src*="quiosco-proceso.webp"]{object-position:center 45%}
+img[src*="numeracion.webp"]{object-position:center 50%}
+img[src*="direccion.webp"]{object-position:center 48%}
+img[src*="pictograma.webp"]{object-position:center 50%}
+img[src*="letras-proceso.webp"]{object-position:center 50%}
+img[src*="letras-pintura.webp"]{object-position:center 50%}
+img[src*="bandera-preparacion.webp"]{object-position:center 45%}
