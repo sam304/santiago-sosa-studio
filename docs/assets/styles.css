@@ -57,3 +57,33 @@ main *,header *,footer *{min-width:0}
  .hours{padding:1rem}.hours dd{font-size:.9375rem}.hours .small{font-size:.875rem}
  .contact-band{gap:1.25rem}.footer{padding-top:2rem}.project-gallery{margin-bottom:2.75rem}
 }
+
+/* Portada más compacta: encabezados -2pt y texto de lectura -1.5pt. */
+body{font-size:calc(1.0625rem - 1.5pt);line-height:1.5}
+p{margin-bottom:.85rem}
+h1{font-size:calc(clamp(3rem,6.4vw,5.5rem) - 2pt)}
+.hero h1{font-size:calc(clamp(3.5rem,6.8vw,6rem) - 2pt)}
+h2{font-size:calc(clamp(2.25rem,4vw,3.5rem) - 2pt)}
+h3{font-size:calc(1.8rem - 2pt)}
+h1,h2,h3{line-height:1.05;margin-bottom:.85rem}
+.lead{font-size:calc(clamp(1.125rem,1.6vw,1.35rem) - 1.5pt);line-height:1.45}
+.product p{font-size:calc(1rem - 1.5pt)}
+.small,.examples p{font-size:calc(.9375rem - 1.5pt)}
+.hero{padding-top:2rem;padding-bottom:1rem}
+.hero .actions{margin-top:1rem}
+@media(max-width:850px){.hero h1{font-size:calc(3.5rem - 2pt)}}
+@media(max-width:600px){
+ body{font-size:calc(1rem - 1.5pt);line-height:1.45}
+ .header-inner{min-height:70px;padding-block:10px}
+ h1,.hero h1{font-size:calc(clamp(2.4rem,10vw,3rem) - 2pt)}
+ h2{font-size:calc(clamp(1.9rem,7.5vw,2.4rem) - 2pt)}
+ h3{font-size:calc(1.65rem - 2pt)}
+ .contact-layout h2{font-size:calc(1.85rem - 2pt)}
+ .lead,.hero .lead{font-size:calc(1rem - 1.5pt);line-height:1.45}
+ .hours dd{font-size:calc(.9375rem - 1.5pt)}.hours .small{font-size:.75rem}
+ .hero{padding-top:1rem;padding-bottom:.5rem;gap:1rem}
+ .hero .actions{margin-top:.85rem;gap:8px}
+ .hero h1{max-width:100%;margin-bottom:.6rem}
+ .hero figure img{aspect-ratio:4/3}
+ .hero + .section{padding-top:2rem}
+}
