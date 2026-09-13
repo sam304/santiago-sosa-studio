@@ -93,3 +93,15 @@ h1,h2,h3{line-height:1.05;margin-bottom:.85rem}
 .service-visual img{width:104px;height:104px;aspect-ratio:1;object-fit:cover;border-radius:4px}
 .service-visual .number{display:block;font-size:1rem;margin-top:.4rem}
 @media(max-width:600px){.service{grid-template-columns:76px minmax(0,1fr);gap:1rem}.service-visual img{width:76px;height:76px}.service h3{font-size:1.4rem}}
+
+/* Soluciones en móvil: evitar una columna de texto estrecha junto a la imagen. */
+@media(max-width:600px){
+ .service-grid{grid-template-columns:minmax(0,1fr)}
+ .service{grid-template-columns:minmax(0,1fr);gap:1rem;padding-block:1.75rem}
+ .service-visual{display:flex;align-items:center;gap:1rem}
+ .service-visual img{width:96px;height:96px;flex:none}
+ .service-visual .number{margin:0;font-size:1rem}
+ .service h3{font-size:1.55rem;line-height:1.15;margin-bottom:.65rem}
+ .service p{max-width:none;margin-bottom:.65rem;line-height:1.45}
+ .service .text-link{min-height:44px}
+}
