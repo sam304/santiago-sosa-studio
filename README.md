@@ -1,39 +1,32 @@
-# Santiago Sosa Studio — fase 4
+# Santiago Sosa Studio — revisión estructural y UX
 
-Sitio estático en español. HTML5, CSS3 y JavaScript nativo. No necesita Node, paquetes ni backend para funcionar. Abrir `docs/index.html` después de extraer el ZIP. Todos los enlaces usan rutas relativas compatibles con hosting convencional y subdirectorios.
+Sitio estático con 18 páginas, HTML/CSS/JS nativo y fuentes locales. Se conserva la identidad visual.
 
-## Contenido
+## Editar y verificar
 
-11 páginas: Inicio, Soluciones, Productos, Proyectos, El taller, Contacto, tres fichas de producto y dos aplicaciones conceptuales.
+- `build.py` es la fuente de contenido: `python build.py` regenera los HTML.
+- `docs/assets/styles.css` conserva el diseño y añade formulario y ajustes responsive.
+- `docs/assets/main.js` controla menú, parámetros y preparación de consultas.
+- `docs/assets/config.js` conserva el WhatsApp existente. Sin correo configurado.
+- `python validate.py` comprueba rutas, anclas, metadatos y parámetros.
+- `python -m http.server 8765 --directory docs` permite previsualizar.
 
-- `docs/`: sitio, listo para copiar a la raíz pública del hosting cuando se apruebe publicar.
-- `docs/assets/styles.css`: colores, tipografía, espaciado y responsive.
-- `docs/assets/config.js`: teléfono WhatsApp internacional (solo dígitos) y correo reales.
-- `docs/assets/main.js`: menú accesible y consultas contextualizadas.
-- `build.py`: fuente de contenido y componentes compartidos. `python3 build.py` regenera los HTML sin dependencias. Editar aquí los contenidos para conservar cambios en futuras regeneraciones. También se pueden editar directamente los HTML si no se regenera.
+## Formulario
 
-## Estado y pendientes
+Se prepara la consulta para WhatsApp, según elección del usuario. Solo nombre, teléfono y necesidad son obligatorios. El visitante revisa el resumen y envía el mensaje en WhatsApp. No hay recepción en servidor ni almacenamiento. Adjuntos preparados pero deshabilitados; se comparten en WhatsApp hasta disponer de recepción segura. Los parámetros interes, producto y origen se validan contra valores conocidos. Editar campos invalida el resumen previo.
 
-No publicado. Sin repositorio remoto creado. Se mantuvo el trabajo dentro de fase 4.
+## Contenido y arquitectura
 
-Antes de publicación:
-1. Completar WhatsApp y correo en `config.js`. En ausencia de datos, no se generan enlaces ficticios: contacto muestra disponibilidad próxima.
-2. Reemplazar fotografías conceptuales por fotografías propias. Las aplicaciones mostradas NO son proyectos ejecutados ni clientes reales. Actualizar las descripciones y etiquetas al incorporar material real.
-3. Incorporar dirección/horario únicamente si se van a publicar y confirmar atención presencial.
-4. Ejecutar fase 5: revisión visual en navegador, teclado, móvil, contraste, zoom y recorrido completo de contacto.
-5. Con dominio confirmado y contenido real, retirar `noindex,nofollow`, añadir canonical, sitemap y metadatos de idioma según URLs finales. No se inventó dominio ni marcado de negocio con información no confirmada.
-6. Fase 6 requiere aprobación: GitHub, hosting y dominio. La carpeta `.openai` solo declara el directorio estático; no hay sitio registrado ni desplegado.
+Home presenta el estudio, dos trabajos, capacidades resumidas y dos productos. Soluciones conserva cuatro categorías. Productos conserva tres tipologías y fichas. Todos son `data-product-type="custom"`; los modos futuros standard y configurable no activan compra ni precios. Proyectos muestra cuatro trabajos; el proceso se presenta en El Taller. Se conservan todas las imágenes y rutas. Referencias conceptuales etiquetadas. Horario provisional y ubicación sin cambios.
 
-La instalación se evalúa y cotiza por separado según alcance, ubicación, complejidad y desplazamiento.
+Páginas reales: index,follow y canonical del dominio santiagososastudio.com. Las dos fichas conceptuales conservan noindex,follow. Un staging público debe impedir indexación a nivel de servidor.
 
-## Diseño
+## Publicación
 
-Paleta: mineral #F5F5F2, grafito #202224, naranja #FF6B35. Soluciones, productos y sectores son secciones independientes con 64–120 px de espacio vertical. Responsive: 1050, 850 y 600 px; navegación móvil con teclado/Escape. Se respeta movimiento reducido. Fotografías WebP de 1200 × 900, carga diferida excepto imagen principal.
+Publicar solo el contenido de docs, con index.html en la raíz. GitHub conserva el código fuente y los archivos generados. No hay workflow de despliegue en el repositorio; subir los cambios a GitHub no actualiza automáticamente el sitio en producción.
 
-## Idiomas
+## Validación
 
-Español inicial (`lang="es"`). Para inglés se recomienda añadir páginas bajo `/en/`, navegación entre equivalentes y hreflang con dominio final. No traducido todavía.
+18 páginas y 330 referencias locales. Navegador: 390, 768 y 1440 px (54 combinaciones), sin overflow horizontal ni imágenes cargadas rotas; un H1 por página y sin errores JS registrados. Formulario, resumen, edición, parámetros válidos/desconocidos y menú móvil/Escape comprobados sin enviar mensajes. Revisión visual de las seis páginas principales y formulario móvil.
 
-## Verificaciones de fase 4
-
-Sintaxis JavaScript y enlaces/recursos locales verificados. No se ha realizado todavía la revisión visual en navegador de fase 5. No hay formulario ni envío de datos a servidor. Las consultas abren WhatsApp/mailto una vez configurados.
+Sin e-commerce, pagos, usuarios, Supabase, CRM, filtros, buscador ni automatizaciones.
