@@ -22,9 +22,17 @@ const interests = {
   'numero-habitacion': 'Números de habitación', 'exhibidor-acrilico': 'Exhibidores en acrílico',
   'placa-personalizada': 'Placas personalizadas', exhibidor: 'Exhibidor para punto de atención'
 };
-const selected = interests[new URLSearchParams(location.search).get('interes')] || '';
+const params = new URLSearchParams(location.search);
+const ownInterest = key => Object.prototype.hasOwnProperty.call(interests, key) ? interests[key] : '';
+const selected = ownInterest(params.get('producto')) || ownInterest(params.get('interes'));
+const origins = { proyectos: 'Proyectos', taller: 'El taller' };
+const originKey = params.get('origen');
+const origin = Object.prototype.hasOwnProperty.call(origins, originKey) ? origins[originKey] : '';
 const interest = document.querySelector('#interest');
-if (interest && selected) { interest.hidden = false; interest.textContent = 'Tu consulta: ' + selected; }
+if (interest && (selected || origin)) {
+  interest.hidden = false;
+  interest.textContent = selected ? 'Tu consulta: ' + selected : 'Vienes de: ' + origin;
+}
 const config = window.STUDIO_CONFIG || {};
 const message = 'Hola, Santiago Sosa Studio. Quisiera solicitar una cotización' + (selected ? ' para: ' + selected : ' para mi proyecto') + '.';
 let available = false;
@@ -40,3 +48,55 @@ if (email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(config.email || '')) {
 }
 const pending = document.querySelector('#contact-pending');
 if (pending) pending.hidden = available;
+
+// Static quote preparation: no upload, storage or submission to a server.
+// A future receiving service must validate inputs and attachments on its server.
+const form = document.querySelector('#quote-form');
+if (form) {
+  const fields = document.querySelector('#quote-fields');
+  const need = document.querySelector('#quote-need');
+  const review = document.querySelector('#quote-review');
+  const summary = document.querySelector('#quote-summary');
+  const send = document.querySelector('#quote-send');
+  const name = document.querySelector('#quote-name');
+  const phone = document.querySelector('#quote-phone');
+  const hasWhatsApp = /^\d{10,15}$/.test(config.whatsapp || '');
+  fields.disabled = !hasWhatsApp;
+  if (selected) need.value = selected;
+  if (!hasWhatsApp) {
+    document.querySelector('#quote-help').textContent = 'La preparación de consultas estará disponible cuando se habilite el contacto por WhatsApp.';
+  }
+  const validate = () => {
+    [name, phone, need].forEach(field => field.setCustomValidity(
+      field.value.trim() ? '' : 'Completa este campo para preparar tu consulta.'
+    ));
+  };
+  form.addEventListener('input', () => {
+    validate();
+    review.hidden = true;
+    send.removeAttribute('href');
+  });
+  form.addEventListener('change', () => { review.hidden = true; send.removeAttribute('href'); });
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    validate();
+    if (!form.reportValidity() || !hasWhatsApp) return;
+    const data = new FormData(form);
+    const labels = {
+      nombre: 'Nombre', contacto: 'WhatsApp / teléfono', necesidad: 'Qué necesito',
+      cantidad: 'Cantidad aproximada', medidas: 'Medidas aproximadas',
+      fecha: 'Fecha deseada', instalacion: 'Instalación'
+    };
+    const lines = ['Hola, Santiago Sosa Studio. Quisiera solicitar una cotización.'];
+    for (const [key, label] of Object.entries(labels)) {
+      const value = String(data.get(key) || '').trim();
+      if (value) lines.push(label + ': ' + value);
+    }
+    if (origin) lines.push('Origen de la consulta: ' + origin);
+    const text = lines.join('\n');
+    summary.textContent = text;
+    send.href = 'https://wa.me/' + config.whatsapp + '?text=' + encodeURIComponent(text);
+    review.hidden = false;
+    document.querySelector('#review-title').focus();
+  });
+}
